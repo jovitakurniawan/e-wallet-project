@@ -16,10 +16,18 @@ Refer to Google Doc for more information: https://docs.google.com/document/d/1Kx
 
 | Task | Done? |
 | --- | --- |
-| /GET Verify Account Number | &#9745; |
-| /GET Get Fund Balance | &#9744; |
-| /GET Add Fund | &#9744; |
-| /GET Pay or Transfer Fund | &#9744; |
+| (/GET user) Get user details | &#9745; |
+| (/POST user/add) Register users | &#9744; |
+| (/GET plans) Get user plans | &#9744; |
+| (/GET account) Get users' account | &#9744; |
+| (/POST account/add) Add account to user | &#9744; |
+| (/PUT update balance) Add funds to users' account | &#9744; |
+| (/DEL account/delete) Delete account from user | &#9744; |
+| (/GET transaction/all) Get all transaction details | &#9744; |
+| (/GET transaction: by transaction_id) Get specific transaction details by transaction id | &#9744; |
+| (/GET transaction: by account_id) Get all transaction details by account id | &#9744; |
+| (/DEL transaction/delete) Delete transaction | &#9744; |
+| (/POST transaction/add) Add transaction | &#9744; |
 
 ### Backend Database
 
