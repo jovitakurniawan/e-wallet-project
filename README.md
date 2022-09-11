@@ -3,7 +3,6 @@
 Refer to Google Doc for more information: https://docs.google.com/document/d/1KxPCGJi58hU98_3guJVuSNArtr_Hu6CR_EHCpL53ipg/edit#
 
 ## Checklist
-___
 
 ### Frontend
 
@@ -17,8 +16,9 @@ ___
 
 | Task | Done? |
 | --- | --- |
-| TEST | &#9745; |
-| ... | &#9744; |
+| /GET Balance | &#9745; |
+| /GET Add Funds | &#9744; |
+| /GET Pay / Transfer Funds | &#9744; |
 
 ### Backend Database
 
