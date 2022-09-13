@@ -12,7 +12,7 @@ const conn = mysql.createConnection ({
     multipleStatements: true,
 });
 
-console.log(process.env);
+// console.log(process.env);
 
 // var conn = mysql.createConnection ({
 //     host: process.env.DBHOST,
@@ -23,10 +23,10 @@ console.log(process.env);
 // });
 
 
-
 conn.connect();
 
 console.log("Successfully connect to MySQL database");
+
 
 module.exports = conn;
 

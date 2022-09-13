@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "8b0f9b1f-52f5-4f7c-8d1a-9e5a82aeb948",
+		"name": "test Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "22429923"
+	},
+	"item": [
+		{
+			"name": "/api/user/get/UserDetail/All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:3000/api/user/get/AllUserDetail"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/user/get/UserDetail/ById/:user_id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/user/get/UserbyId/:user_id",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"get",
+						"UserbyId",
+						":user_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/user/post/NewUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"email_address\": \"kellypalmer@yahoo.com\",\n        \"user_password\": \"123456\",\n        \"first_name\": \"Kelly\",\n        \"last_name\": \"Palmer\",\n        \"phone_no\": \"88775577\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/api/user/post/NewUser"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/user/delete/User/ById/:user_id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/user/delete/UserbyId/:user_id",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"delete",
+						"UserbyId",
+						":user_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "11"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/balance/get/Balance/ById/:user_id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/balance/get/UserbyId/:user_id",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"balance",
+						"get",
+						"UserbyId",
+						":user_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/topup/get/History/ById/:user_id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/topup/get/History/ById/:user_id",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"topup",
+						"get",
+						"History",
+						"ById",
+						":user_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/topup/post/TopUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"user_id\": 2, \n        \"topup_amt\": 10,\n        \"balance_id\": 2\n    }\n]\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/api/topup/post/addtopup"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/transfer/get/TransferHistory/BySenderId/:user_id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/transfer/get/TransferHistory/BySenderId/:user_id",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"transfer",
+						"get",
+						"TransferHistory",
+						"BySenderId",
+						":user_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transfer/get/recipienthist",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/transfer/get/RecipientHistory/:user_id",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"transfer",
+						"get",
+						"RecipientHistory",
+						":user_id"
+					],
+					"variable": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transfer/post/addtransfer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"transfer_amt\": 100, \n        \"sender_id\": 1,\n        \"sender_phone_no\": \"89673213\",\n        \"recipient_id\": 2,\n        \"recipient_phone_no\": \"99448822\",\n        \"sender_balance_id\": 1,\n        \"recipient_balance_id\": 2 \n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:3000/api/transfer/post/addtransaction"
+			},
+			"response": []
+		}
+	]
+}
