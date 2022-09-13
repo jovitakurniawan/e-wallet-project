@@ -33,5 +33,9 @@ router.route("/api/transfer/get/TransferHistory/ByRecipientId/:user_id").get(tra
 router.route("/api/transfer/post/Transfer").post(transferAPI.postTransfer);
 
 
+// // TESTING 
+
+// router.route("/api/user/post/v2/NewUser").post(userAPI.postNewUserv2);
+
 module.exports = router; 
 

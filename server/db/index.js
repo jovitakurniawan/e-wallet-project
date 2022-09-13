@@ -7,9 +7,10 @@ const mysql = require('mysql');
 const conn = mysql.createConnection ({
     host: "localhost",
     user: "root",
-    password: "******",
+    password: "frakenstein",
     database: "db_moneyapp",
     multipleStatements: true,
+    // connectionLimit: 10,
 });
 
 // console.log(process.env);
@@ -22,6 +23,13 @@ const conn = mysql.createConnection ({
 //     multipleStatements: true,
 // });
 
+// conn.getConnection((err, connection) => {
+//     if(err){
+//         console.log(err);
+//     }
+//     console.log("Database connected successfully");
+//     connection.release();
+// });
 
 conn.connect();
 
