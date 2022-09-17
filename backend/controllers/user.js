@@ -12,16 +12,31 @@ exports.getAllUserDetail = (req, res) => {
             res.json(result);
         } else {
             res.json(err);
-            // console.log(err);
+            console.log(err);
         }
     });
 };
 
 // api/user/get/userdetailbyid - TESTED
 exports.getUserDetailById = (req, res) => {
-    const query = "SELECT * FROM tb_user WHERE user_id = ?";
+    const query = "SELECT * FROM tb_user WHERE email_address = ?";
     
-    conn.query(query, [req.params.user_id], (err, result) => {
+    conn.query(query, [req.params.email_address], (err, result) => {
+        if (!err){
+            // console.log(result);
+            res.json(result);
+        } else {
+            res.json(err);
+            console.log(req.body);
+            // console.log(err);
+        }
+    });
+};
+
+exports.getUserDetailByPhone = (req, res) => {
+    const query = "SELECT * FROM tb_user WHERE phone_no = ?";
+    
+    conn.query(query, [req.params.phone_no], (err, result) => {
         if (!err){
             // console.log(result);
             res.json(result);
@@ -129,13 +144,7 @@ exports.postNewUserv2 = (req, res) => {
 };
 
 
-
-
-
-
-
 // api / delete / user account 
-// [PENDING UPDATE] delete all data with corresponding user id in other tables
 
 exports.deleteUserById = (req, res) => {
     const query = "DELETE FROM tb_user WHERE user_id = ?";

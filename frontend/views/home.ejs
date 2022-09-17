@@ -1,0 +1,35 @@
+<%- include('partials/header') %>
+
+
+<div class="jumbotron centered" style="background-color: white;">
+
+    
+  <div class="container">
+    <img src="https://iili.io/Pi86y7.png" alt="app-logo" width="200" height="200">
+
+    <h1 class="display-3">MooLah</h1>
+    <p class="lead">Your most trusted e-wallet.</p>
+    <hr>
+      <!-- <h6 class="display-6">Hi, Jovita</h6> -->
+      <h6 class="display-6">Hi, <%= myName %></h6>
+
+
+    <h4 class="display-6">Wallet Balance: $<%= myCurrentBal %></h4>
+    <hr>
+
+    <!-- <form action="/login" method="POST"> -->
+        <a class="btn btn-light btn-lg" href="/topup" role="button">Top Up</a>
+        <a class="btn btn-light btn-lg" href="/withdraw" role="button">Withdraw</a>
+        <a class="btn btn-light btn-lg" href="/transfer" role="button">Transfer</a>
+        <a class="btn btn-light btn-lg" href="/history" role="button">History</a>
+        <a class="btn btn-light btn-lg" href="/login" role="button">Sign Out</a>
+      <!-- </form> -->
+
+
+  </div>
+
+</div>
+
+
+
+<%- include('partials/footer') %>

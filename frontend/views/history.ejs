@@ -1,0 +1,129 @@
+<%- include('partials/header') %>
+
+<div class="jumbotron centered" style="background-color: white; text-align: center;">
+    <div class="container">
+      <img src="https://iili.io/Pi86y7.png" alt="app-logo" width="200" height="200">
+  
+      <h1 class="display-3">MooLah</h1>
+      <p class="lead">Your most trusted e-wallet.</p>
+      <hr>
+
+
+      <p class="lead">Top Up History</p>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Top Up Amount</th>
+            <th scope="col">Top Up Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% topup_count = 1; %>
+          <% trfHist.forEach( topup => { %>
+              <tr>
+              <th scope="row"><%= topup_count++ %></th>
+              <td><%= topup.topup_amt %></td>
+              <td><%= topup.topup_date %></td>
+              </tr>
+          <% }); %>
+
+        </tbody>
+      </table>
+
+      <p class="lead">Withdrawal History</p>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Withdraw Amount</th>
+            <th scope="col">Withdraw Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% withdraw_count = 1; %>
+          <% withHist.forEach( withdraw => { %>
+              <tr>
+              <th scope="row"><%= withdraw_count++ %></th>
+              <td><%= withdraw.withdraw_amt %></td>
+              <td><%= withdraw.withdraw_date %></td>
+              </tr>
+          <% }); %>
+
+        </tbody>
+      </table>
+
+      <hr>
+
+      <p class="lead">Transfer History (Send)</p>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Recipient First Name</th>
+            <th scope="col">Recipient Last Name</th>
+            <th scope="col">Recipient Phone No</th>
+            <th scope="col">Transfer Amount</th>
+            <th scope="col">Message</th>
+            <th scope="col">Transfer Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% trfsend_count = 1; %>
+          <% trfSendHist.forEach( send => { %>
+              <tr>
+              <th scope="row"><%= trfsend_count++ %></th>
+              <td><%= send.recipient_fname %></td>
+              <td><%= send.recipient_lname %></td>
+              <td><%= send.recipient_phone_no %></td>
+              <td><%= (send.transfer_amt) %></td>
+              <td><%= send.transfer_message %></td>
+              <td><%= send.transfer_date %></td>
+              </tr>
+          <% }); %>
+        </tbody>
+      </table>
+
+
+      <p class="lead">Transfer History (Recieve)</p>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Sender First Name</th>
+            <th scope="col">Sender Last Name</th>
+            <th scope="col">Sender Phone No</th>
+            <th scope="col">Transfer Amount</th>
+            <th scope="col">Message</th>
+            <th scope="col">Transfer Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% trfreceive_count = 1; %>
+          <% trfRecHist.forEach( rec => { %>
+              <tr>
+              <th scope="row"><%= trfreceive_count++ %></th>
+              <td><%= rec.sender_fname %></td>
+              <td><%= rec.sender_lname %></td>
+              <td><%= rec.sender_phone_no %></td>
+              <td><%= rec.transfer_amt %></td>
+              <td><%= rec.transfer_message %></td>
+              <td><%= rec.transfer_date %></td>
+              </tr>
+          <% }); %>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <a class="btn btn-light btn-lg" href="/home" role="button">Back to Home</a>
+
+
+    </div>
+
+  
+  </div>
+
+<%- include('partials/footer') %>
+

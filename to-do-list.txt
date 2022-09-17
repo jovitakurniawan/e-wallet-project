@@ -1,0 +1,15 @@
+BE task: 
+
+1. Create withdraw API (done)
+2. Update data type for topup -> unsigned (done)
+3. Add Transfer note to tb_transfer (done)
+
+FE task: 
+
+1. Connect withdraw API to withdraw page - done
+2. Add wallet balance to transfer/topup/withdraw pages  - done
+3. Add notes box to transfer page - done
+4. Add withdraw table to history - done
+5. Add message to transfer history - done
+6. Parse timestamp to datetime format - SUNDAY 
+

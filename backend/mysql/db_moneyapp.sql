@@ -1,13 +1,13 @@
 # INSTRUCTION: SELECT ALL THE CODE AND PRESS THE FIRST LIGHTNING ICON 
 
+# Drop database 
+DROP DATABASE IF EXISTS db_moneyapp;
+
 # Create Money App DB 
 CREATE DATABASE  IF NOT EXISTS db_moneyapp;
 
 # Use Money App DB 
 USE db_moneyapp;
-
-# Drop database 
-# DROP DATABASE IF EXISTS db_moneyapp;
 
 # Create tb_user 
 CREATE TABLE IF NOT EXISTS tb_user (
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS tb_user (
 CREATE TABLE IF NOT EXISTS tb_balance (
 	balance_id INT NOT NULL AUTO_INCREMENT, 
 	user_id INT NOT NULL, 
-	current_balance FLOAT NOT NULL DEFAULT 0,
+	current_balance FLOAT UNSIGNED NOT NULL DEFAULT 0,
     created_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     last_updated DATETIME ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
     PRIMARY KEY (balance_id), 
@@ -44,10 +44,21 @@ CREATE TABLE IF NOT EXISTS tb_balance (
 CREATE TABLE IF NOT EXISTS tb_topup (
 	topup_id INT NOT NULL AUTO_INCREMENT, 
     user_id INT NOT NULL,
-    topup_amt FLOAT NOT NULL,
+    topup_amt FLOAT UNSIGNED NOT NULL,
     topup_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     balance_id INT NOT NULL, 
 	PRIMARY KEY (topup_id), 
+    FOREIGN KEY (balance_id) REFERENCES tb_balance (balance_id)
+); 
+
+# create tb_withdraw
+CREATE TABLE IF NOT EXISTS tb_withdraw (
+	withdraw_id INT NOT NULL AUTO_INCREMENT, 
+    user_id INT NOT NULL,
+    withdraw_amt FLOAT UNSIGNED NOT NULL,
+    withdraw_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    balance_id INT NOT NULL, 
+	PRIMARY KEY (withdraw_id), 
     FOREIGN KEY (balance_id) REFERENCES tb_balance (balance_id)
 ); 
 
@@ -61,6 +72,7 @@ CREATE TABLE IF NOT EXISTS tb_transfer (
     recipient_phone_no CHAR(8) NOT NULL, 
     sender_balance_id INT NOT NULL, 
     recipient_balance_id INT NOT NULL, 
+	transfer_message VARCHAR(500) NULL, 
     transfer_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 
     PRIMARY KEY (transfer_id),
     FOREIGN KEY (recipient_id) REFERENCES tb_user (user_id),
@@ -94,8 +106,8 @@ VALUES
 # DROP TABLE tb_balance;
 
 # Insert Mock Data into tb_balance
-INSERT INTO tb_balance (balance_id, user_id)
-VALUES (1, 1);
+INSERT INTO tb_balance (balance_id, user_id, current_balance)
+VALUES (1, 1, 200);
 
 INSERT INTO tb_balance (balance_id, user_id, current_balance)
 VALUES (2, 2, 100);
@@ -112,11 +124,16 @@ VALUES (2, 2, 100);
 # Insert Mock Data into tb_topup
 INSERT INTO tb_topup (topup_id, user_id, topup_amt, balance_id)
 VALUES 
-(1, 1, 100, 1), 
-(2, 2, 400, 2);
+(1, 1, 12, 1), 
+(2, 2, 2, 2);
 
 # Show first 10 data in tb_topup
-# SELECT * FROM tb_topup; 
+
+# Insert Mock Data into tb_withdraw 
+INSERT INTO tb_withdraw (topup_id, user_id, topup_amt, balance_id)
+VALUES 
+(1, 1, 12, 1), 
+(2, 2, 22, 2);
 
     
 # Consider adding first & last name into transfer table 
@@ -127,12 +144,8 @@ VALUES
 
 
 # Insert Mock Data into tb_transfer
-INSERT INTO tb_transfer (transfer_id, transfer_amt, sender_id, sender_phone_no, recipient_id, recipient_phone_no, sender_balance_id, recipient_balance_id) 
+INSERT INTO tb_transfer (transfer_id, transfer_amt, sender_id, sender_phone_no, recipient_id, recipient_phone_no, sender_balance_id, recipient_balance_id, transfer_message) 
 VALUES 
-(1, 10, 1, '89673213', 2, '99448822', 1, 2), 
-(2, 20, 2, '99448822', 3, '99776655', 2, 1);
-
-
-# Show all data in tb_transfer 
-# SELECT * FROM tb_transfer; 
+(1, 10, 1, '89673213', 2, '99448822', 1, 2, 'food'), 
+(2, 20, 2, '99448822', 3, '99776655', 2, 1, 'present');
 

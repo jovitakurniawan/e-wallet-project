@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<!-- <div>
+    <a class="btn btn-dark btn-lg" href="/login" role="button">Sign out</a>
+</div> -->
+
+
+<div class="jumbotron centered" style="background-color: white; text-align: center;">
+    <div class="container">
+      <img src="https://iili.io/Pi86y7.png" alt="app-logo" width="200" height="200">
+  
+      <h1 class="display-3">MooLah</h1>
+      <p class="lead">Your most trusted e-wallet.</p>
+      
+      <hr>
+
+      <form action="/transfer" method="POST">
+        <div class="form-group">
+            <label for="transfer_amt">Transfer Amount</label>
+            <input type="text" class="form-control" name="transfer_amt">
+          </div>
+
+          <div class="form-group">
+            <label for="recipient_phone_no">Recipient Phone Number</label>
+            <input type="text" class="form-control" name="recipient_phone_no">
+          </div>
+
+
+          <div class="form-group">
+            <label for="transfer_message">Message</label>
+            <input type="text" class="form-control" name="transfer_message">
+          </div>
+
+          <button type="submit" class="btn btn-dark">Confirm</button> 
+          <a class="btn btn-light" href="/home" role="button">Cancel</a>    
+      </form>
+  
+    </div>
+  
+  </div>
+
+<%- include('partials/footer') %>

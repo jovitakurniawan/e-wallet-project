@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+
+<div class="jumbotron centered" style="background-color: white;">
+
+    
+  <div class="container">
+    <img src="https://iili.io/Pi86y7.png" alt="app-logo" width="200" height="200">
+
+    <h1 class="display-3">MooLah</h1>
+    <p class="lead">Your most trusted e-wallet.</p>
+    <hr>
+
+    <form action="/login" method="POST">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email_address">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="user_password">
+        </div>
+        <button type="submit" class="btn btn-dark btn-lg">Login</button>
+        <a class="btn btn-light btn-lg" href="/register" role="button">Register</a>
+      </form>
+
+
+  </div>
+
+</div>
+
+
+
+<%- include('partials/footer') %>

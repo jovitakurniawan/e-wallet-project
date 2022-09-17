@@ -2,12 +2,11 @@ const mysql = require('mysql');
 // const dotenv = require('dotenv');
 // dotenv.config();
 
-
 //[For your action]: Change "user" and "password" to your local MySQL Workbench Connection 
 const conn = mysql.createConnection ({
     host: "localhost",
     user: "root",
-    password: "********",
+    password: "frakenstein",
     database: "db_moneyapp",
     multipleStatements: true,
     // connectionLimit: 10,

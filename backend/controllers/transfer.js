@@ -15,6 +15,7 @@ exports.getSenderTrfHist = (req, res) => {
     tf.recipient_id, ur.first_name as recipient_fname, 
     ur.last_name as recipient_lname, 
     tf.recipient_phone_no, 
+    tf.transfer_message,
     br.balance_id, 
     br.current_balance, br.last_updated
     FROM tb_transfer tf 
@@ -55,6 +56,7 @@ exports.getRecipientTrfHist = (req, res) => {
     us.last_name as sender_lname, 
     tf.sender_phone_no, 
     bs.balance_id, 
+    tf.transfer_message,
     bs.current_balance, bs.last_updated
     FROM tb_transfer tf 
     JOIN tb_user us
@@ -89,12 +91,13 @@ exports.postTransfer = (req, res) => {
     recipient_phone_no: req.body[0].recipient_phone_no,
     sender_balance_id: req.body[0].sender_balance_id,
     recipient_balance_id: req.body[0].recipient_balance_id,
+    transfer_message: req.body[0].transfer_message,
   };
 
   const query = `INSERT INTO tb_transfer (transfer_amt, sender_id, 
     sender_phone_no, recipient_id, recipient_phone_no,
-    sender_balance_id, recipient_balance_id)
-    VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    sender_balance_id, recipient_balance_id, transfer_message)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
 
   conn.query(query, Object.values(data), (err) => {
