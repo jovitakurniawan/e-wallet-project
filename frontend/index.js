@@ -30,7 +30,6 @@ app.use(session({
     resave: false
 }));
 
-
 // var session - not recommended to store user session like this. 
 var cookiesSession;
 
@@ -52,11 +51,9 @@ app.get("/register", function(req,res){
 
 
 app.get("/home", function(req,res){
-    console.log("get-home");
     cookiesSession = req.session;
     let myName = req.session.first_name;
     let myUID = req.session.user_id;
-    console.log(myName, myUID);
 
     var requestOptions = {
         method: 'GET',
@@ -69,11 +66,9 @@ app.get("/home", function(req,res){
             let myBalanceId = result[0].balance_id;
             let myCurrentBal = result[0].current_balance;
 
-
             cookiesSession = req.session;
             cookiesSession.balance_id = myBalanceId;
 
-            console.log(result, cookiesSession);
             res.render("home", {myName: myName, myCurrentBal: myCurrentBal});
 
         })
@@ -99,14 +94,9 @@ app.get("/transfer", function(req,res){
 // GET to check user credential. After user successfully login, redirect to /home page. Else, stay on /login page 
 
 app.post("/login", (req,res) => {
-    // console.log(req.body);
 
     let emailAddress = req.body.email_address;
     let userPassword = req.body.user_password;
-
-    // console.log(req.session.user_id);
-
-    // console.log(emailAddress, userPassword);
 
     var requestOptions = {
         method: 'GET',
@@ -118,7 +108,6 @@ app.post("/login", (req,res) => {
         .then(
             result => {
 
-                console.log(result);
                 let resEmail = result[0].email_address;
                 let resPass = result[0].user_password;
                 let resUserId = result[0].user_id;
@@ -128,14 +117,11 @@ app.post("/login", (req,res) => {
                 if (resEmail === emailAddress && resPass === userPassword) {
 
                     cookiesSession = req.session;
-                    // var cookiesSession = req.session.cookie;
                     cookiesSession.email_address = resEmail;
                     cookiesSession.user_password = resPass;
                     cookiesSession.user_id = resUserId;
                     cookiesSession.first_name = resName;
                     cookiesSession.phone_no = resPhone;
-
-                    // console.log(cookiesSession);
 
                     res.redirect("/home");
                     console.log("Login successful")
@@ -170,7 +156,7 @@ app.post("/register", (req, res) => {
       
       fetch("http:localhost:3000/api/user/post/NewUser", requestOptions)
         .then(response => response.text())
-        .then(result => res.redirect("/login"))
+        .then(resuld => res.redirect("/login"))
         .catch(error => console.log('error', error));
 
 });
@@ -182,7 +168,6 @@ app.post("/register", (req, res) => {
 app.post("/transfer", (req, res) => {
 
     cookiesSession = req.session;
-    console.log("post-transfer");
 
     const trfData = ([{
         "transfer_amt": req.body.transfer_amt,
@@ -203,11 +188,9 @@ app.post("/transfer", (req, res) => {
     fetch(`http:localhost:3000/api/balance/get/Balance/ById/${trfData[0].sender_id}`, requestOptions)
     .then(response => response.json())
     .then(result => {
-        console.log(result, "This is result for transfer");
-        
+
         let senderBalance = result[0].current_balance;
 
-        console.log(senderBalance);
 
         if (senderBalance > trfData[0].transfer_amt) {
 
@@ -219,7 +202,7 @@ app.post("/transfer", (req, res) => {
             fetch(`http:localhost:3000/api/user/get/UserDetail/ByPhone/${trfData[0].recipient_phone_no}`)
             .then(response => response.json())
             .then(result => {
-                console.log(result, result.length)
+
                 
 
 
@@ -239,7 +222,7 @@ app.post("/transfer", (req, res) => {
                     fetch(`http:localhost:3000/api/balance/get/Balance/ById/${trfData[0].recipient_id}`)
                     .then(response => response.json())
                     .then(result => {
-                        console.log(result, "Yo yo look here")
+
 
                         let recipientBalanceId = result[0].balance_id;
 
@@ -282,11 +265,11 @@ app.post("/transfer", (req, res) => {
 app.post("/topup", (req, res) => {
 
     cookiesSession = req.session;
-    console.log("post-transfer", cookiesSession);
+
 
     let topupAmt = parseFloat(req.body.topup_amt);
 
-    console.log(topupAmt, typeof(topupAmt));
+
 
 
     var myHeaders = new Headers();
@@ -310,7 +293,7 @@ app.post("/topup", (req, res) => {
     fetch("http:localhost:3000/api/topup/post/TopUp", requestOptions)
     .then(response => response.text())
     .then(result => {
-        console.log(result)
+
         res.redirect("/home")
     })
     .catch(error => console.log('error', error));
@@ -322,11 +305,11 @@ app.post("/topup", (req, res) => {
 app.post("/withdraw", (req, res) => {
 
     cookiesSession = req.session;
-    console.log("post-transfer", cookiesSession);
+
 
     let withdrawAmt = parseFloat(req.body.withdraw_amt);
 
-    console.log(withdrawAmt, typeof(withdrawAmt));
+
 
 
     var myHeaders = new Headers();
@@ -350,7 +333,7 @@ app.post("/withdraw", (req, res) => {
     fetch("http:localhost:3000/api/withdraw/post/Withdraw", requestOptions)
     .then(response => response.text())
     .then(result => {
-        console.log(result)
+
         res.redirect("/home")
     })
     .catch(error => console.log('error', error));
@@ -365,8 +348,6 @@ app.get("/history", (req, res) => {
     // cookie info to feed as query param 
     let historyUID = cookiesSession.user_id;
 
-    console.log(cookiesSession, historyUID);
-
     // get topup history 
     var requestOptions = {
         method: 'GET',
@@ -380,8 +361,6 @@ app.get("/history", (req, res) => {
 
         const trfHist = result;
 
-        // THIS CALL IS SUCCESSFUL
-        console.log(trfHist, "top up");
 
         var requestOptions = {
             method: 'GET',
@@ -395,7 +374,6 @@ app.get("/history", (req, res) => {
 
             const withHist = result;
             
-            console.log(result, "Jisoo withdrawal history");
 
                 var requestOptions = {
                     method: 'GET',
@@ -406,7 +384,6 @@ app.get("/history", (req, res) => {
                   fetch(`http:localhost:3000/api/transfer/get/TransferHistory/BySenderId/${historyUID}`, requestOptions)
                     .then(response => response.json())
                     .then(result => {
-                        console.log(result, "trf hist - out")
     
                         const trfSendHist = result;
     
@@ -420,7 +397,6 @@ app.get("/history", (req, res) => {
                           fetch(`http:localhost:3000/api/transfer/get/TransferHistory/ByRecipientId/${historyUID}`, requestOptions)
                             .then(response => response.json())
                             .then(result => {
-                                console.log(result, "trf hist - in")
     
                                 const trfRecHist = result;
     
@@ -438,8 +414,6 @@ app.get("/history", (req, res) => {
 
     })
     .catch(error => console.log('error', error));
-    
-    console.log("Can call API");
 
 });
 
