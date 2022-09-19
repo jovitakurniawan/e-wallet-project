@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const router = require('../backend/routes/index');
+// const router = require('../backend/routes/index');
 const bodyParser = require("body-parser");
 const session = require('express-session');
 const cookieParser = require("cookie-parser");
@@ -78,15 +78,81 @@ app.get("/home", function(req,res){
 
 
 app.get("/topup", function(req,res){
-    res.render("topup");
+    cookiesSession = req.session;
+    let myName = req.session.first_name;
+    let myUID = req.session.user_id;
+
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      
+    fetch(`http:localhost:3000/api/balance/get/Balance/ById/${myUID}`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            let myBalanceId = result[0].balance_id;
+            let myCurrentBal = result[0].current_balance;
+
+            cookiesSession = req.session;
+            cookiesSession.balance_id = myBalanceId;
+
+            res.render("topup", {myName: myName, myCurrentBal: myCurrentBal});
+
+        })
+        .catch(error => console.log('error', error));
+    // res.render("topup");
 });
 
 app.get("/withdraw", function(req,res){
-    res.render("withdraw");
+    // res.render("withdraw");
+    cookiesSession = req.session;
+    let myName = req.session.first_name;
+    let myUID = req.session.user_id;
+    
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      
+    fetch(`http:localhost:3000/api/balance/get/Balance/ById/${myUID}`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            let myBalanceId = result[0].balance_id;
+            let myCurrentBal = result[0].current_balance;
+
+            cookiesSession = req.session;
+            cookiesSession.balance_id = myBalanceId;
+
+            res.render("withdraw", {myName: myName, myCurrentBal: myCurrentBal});
+
+        })
+        .catch(error => console.log('error', error));
 });
 
 app.get("/transfer", function(req,res){
-    res.render("transfer");
+    // res.render("transfer");
+    cookiesSession = req.session;
+    let myName = req.session.first_name;
+    let myUID = req.session.user_id;
+    
+    var requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+      
+    fetch(`http:localhost:3000/api/balance/get/Balance/ById/${myUID}`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            let myBalanceId = result[0].balance_id;
+            let myCurrentBal = result[0].current_balance;
+
+            cookiesSession = req.session;
+            cookiesSession.balance_id = myBalanceId;
+
+            res.render("transfer", {myName: myName, myCurrentBal: myCurrentBal});
+
+        })
+        .catch(error => console.log('error', error));
 });
 
 
@@ -348,6 +414,13 @@ app.get("/history", (req, res) => {
     // cookie info to feed as query param 
     let historyUID = cookiesSession.user_id;
 
+
+    cookiesSession = req.session;
+    let myName = req.session.first_name;
+    let myUID = req.session.user_id;
+
+
+
     // get topup history 
     var requestOptions = {
         method: 'GET',
@@ -399,8 +472,28 @@ app.get("/history", (req, res) => {
                             .then(result => {
     
                                 const trfRecHist = result;
-    
-                                res.render("history", {trfHist: trfHist, withHist: withHist, trfSendHist: trfSendHist, trfRecHist: trfRecHist});
+                                // const date = trfRecHist[0].transfer_date;
+                                // console.log(trfRecHist, trfRecHist[0].transfer_date, type(date));
+                                var requestOptions = {
+                                    method: 'GET',
+                                    redirect: 'follow'
+                                  };
+                                  
+                                fetch(`http:localhost:3000/api/balance/get/Balance/ById/${myUID}`, requestOptions)
+                                    .then(response => response.json())
+                                    .then(result => {
+                                        let myBalanceId = result[0].balance_id;
+                                        let myCurrentBal = result[0].current_balance;
+                            
+                                        cookiesSession = req.session;
+                                        cookiesSession.balance_id = myBalanceId;
+
+                                        res.render("history", {trfHist: trfHist, withHist: withHist, trfSendHist: trfSendHist, trfRecHist: trfRecHist, myCurrentBal: myCurrentBal});
+                            
+                            
+                                    })
+                                    .catch(error => console.log('error', error));
+                                
     
                             })
                             .catch(error => console.log('error', error));
@@ -418,35 +511,11 @@ app.get("/history", (req, res) => {
 });
 
 
-// // Pending transform date
+// Pending transform date
 // var requestOptions = {
 //   method: 'GET',
 //   redirect: 'follow'
 // };
-
-// fetch("http:localhost:3000/api/balance/get/Balance/ById/9", requestOptions)
-//   .then(response => response.json())
-//   .then(result => {
-//     console.log(result)
-
-//      const d = new Date(result[0].last_updated);
-
-//      const year = d.getFullYear();
-//      const month = d.getMonth();
-
-//     //  const month = getMonth(d);
-//     //  const year = getFullYear(d);
-//     //  const hours = getHours(d);
-//     //  const minutes = getMinutes(d);
-//     //  const seconds = getSeconds(d);
-
-//     //  const end = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
-//     //  console.log(end);
-
-//      console.log(d, typeof(d), year, month);
-//     })
-//   .catch(error => console.log('error', error));
 
 
 

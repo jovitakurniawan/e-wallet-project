@@ -30,6 +30,8 @@ const conn = mysql.createConnection ({
 //     connection.release();
 // });
 
+
+
 conn.connect();
 
 console.log("Successfully connect to MySQL database");

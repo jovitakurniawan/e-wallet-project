@@ -7,6 +7,8 @@
       <h1 class="display-3">MooLah</h1>
       <p class="lead">Your most trusted e-wallet.</p>
       <hr>
+      <h6 class="display-6">Wallet Balance: $<%= myCurrentBal %></h6>
+      <hr>
 
 
       <p class="lead">Top Up History</p>
@@ -20,12 +22,25 @@
         </thead>
         <tbody>
           <% topup_count = 1; %>
+          <% i = 1;%>
           <% trfHist.forEach( topup => { %>
+              <% d = new Date(topup.topup_date);%>
+              <% year = d.getFullYear(d);%>
+              <% month = d.getMonth(d) + 1;      %>
+              <% date = d.getDate(d);     %>
+              <% hours = d.getHours(d);    %>
+              <% minutes = d.getMinutes(d);   %>
+              <% seconds = d.getSeconds(d);  %>
+          
+              <% end = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`; %>
+
               <tr>
               <th scope="row"><%= topup_count++ %></th>
               <td><%= topup.topup_amt %></td>
-              <td><%= topup.topup_date %></td>
+              <td><%= end %></td>
+              <% i++; %>
               </tr>
+
           <% }); %>
 
         </tbody>
@@ -42,11 +57,23 @@
         </thead>
         <tbody>
           <% withdraw_count = 1; %>
+          <% i = 1;%>
           <% withHist.forEach( withdraw => { %>
+            <% d = new Date(withdraw.withdraw_date);%>
+            <% year = d.getFullYear(d);%>
+            <% month = d.getMonth(d) + 1;      %>
+            <% date = d.getDate(d);     %>
+            <% hours = d.getHours(d);    %>
+            <% minutes = d.getMinutes(d);   %>
+            <% seconds = d.getSeconds(d);  %>
+        
+            <% end = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`; %>
+
               <tr>
               <th scope="row"><%= withdraw_count++ %></th>
               <td><%= withdraw.withdraw_amt %></td>
-              <td><%= withdraw.withdraw_date %></td>
+              <td><%= end %></td>
+              <% i++; %>
               </tr>
           <% }); %>
 
@@ -71,7 +98,18 @@
         </thead>
         <tbody>
           <% trfsend_count = 1; %>
+          <% i = 1;%>
           <% trfSendHist.forEach( send => { %>
+            <% d = new Date(send.transfer_date);%>
+            <% year = d.getFullYear(d);%>
+            <% month = d.getMonth(d) + 1;      %>
+            <% date = d.getDate(d);     %>
+            <% hours = d.getHours(d);    %>
+            <% minutes = d.getMinutes(d);   %>
+            <% seconds = d.getSeconds(d);  %>
+        
+            <% end = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`; %>
+
               <tr>
               <th scope="row"><%= trfsend_count++ %></th>
               <td><%= send.recipient_fname %></td>
@@ -79,7 +117,8 @@
               <td><%= send.recipient_phone_no %></td>
               <td><%= (send.transfer_amt) %></td>
               <td><%= send.transfer_message %></td>
-              <td><%= send.transfer_date %></td>
+              <td><%= end %></td>
+              <% i++; %>
               </tr>
           <% }); %>
         </tbody>
@@ -101,7 +140,18 @@
         </thead>
         <tbody>
           <% trfreceive_count = 1; %>
+          <% i = 1;%>
           <% trfRecHist.forEach( rec => { %>
+            <% d = new Date(rec.transfer_date);%>
+            <% year = d.getFullYear(d);%>
+            <% month = d.getMonth(d) + 1;      %>
+            <% date = d.getDate(d);     %>
+            <% hours = d.getHours(d);    %>
+            <% minutes = d.getMinutes(d);   %>
+            <% seconds = d.getSeconds(d);  %>
+        
+            <% end = `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`; %>
+
               <tr>
               <th scope="row"><%= trfreceive_count++ %></th>
               <td><%= rec.sender_fname %></td>
@@ -109,7 +159,8 @@
               <td><%= rec.sender_phone_no %></td>
               <td><%= rec.transfer_amt %></td>
               <td><%= rec.transfer_message %></td>
-              <td><%= rec.transfer_date %></td>
+              <td><%= end %></td>
+              <% i++; %>
               </tr>
           <% }); %>
         </tbody>

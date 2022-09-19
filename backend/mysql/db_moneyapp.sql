@@ -130,7 +130,7 @@ VALUES
 # Show first 10 data in tb_topup
 
 # Insert Mock Data into tb_withdraw 
-INSERT INTO tb_withdraw (topup_id, user_id, topup_amt, balance_id)
+INSERT INTO tb_withdraw (withdraw_id, user_id, withdraw_amt, balance_id)
 VALUES 
 (1, 1, 12, 1), 
 (2, 2, 22, 2);

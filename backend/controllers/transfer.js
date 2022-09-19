@@ -127,7 +127,8 @@ exports.postTransfer = (req, res) => {
               conn.query(findrecipientBal, (err, result) => {
                 if (!err) {
 
-                  let newBalanceR = result[0].current_balance + trfAmount;
+                  let trfAmountParsed = parseFloat(trfAmount);
+                  let newBalanceR = result[0].current_balance + trfAmountParsed;
                 
                   // Update recipient balance 
                   const updaterecipientBalance = `UPDATE tb_balance

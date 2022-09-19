@@ -13,8 +13,10 @@
       <p class="lead">Your most trusted e-wallet.</p>
       
       <hr>
+      <h6 class="display-6">Wallet Balance: $<%= myCurrentBal %></h6>
+      <hr>
 
-      <form action="/transfer" method="POST">
+      <form autocomplete="off" action="/transfer" method="POST">
         <div class="form-group">
             <label for="transfer_amt">Transfer Amount</label>
             <input type="text" class="form-control" name="transfer_amt">
@@ -28,7 +30,7 @@
 
           <div class="form-group">
             <label for="transfer_message">Message</label>
-            <input type="text" class="form-control" name="transfer_message">
+            <input autocomplete="false" type="text" class="form-control" name="transfer_message">
           </div>
 
           <button type="submit" class="btn btn-dark">Confirm</button> 
